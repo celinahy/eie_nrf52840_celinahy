@@ -50,7 +50,7 @@ static const struct bt_data ble_scan_response_data[] = {
     BT_DATA(BT_DATA_NAME_COMPLETE, CONFIG_BT_DEVICE_NAME, sizeof(CONFIG_BT_DEVICE_NAME) - 1),
 };
 
-static uint8_t ble_custom_characteristic_user_data[BLE_CUSTOM_CHARACTERISTIC_MAX_DATA_LENGTH + 1] = {};
+static uint8_t ble_custom_characteristic_user_data[BLE_CUSTOM_CHARACTERISTIC_MAX_DATA_LENGTH + 1] = {'H', 'E', 'Y'};;
 
 /* BLE SERVICE SETUP ---------------------------------------------------------------------------- */
 
@@ -93,6 +93,8 @@ static ssize_t ble_custom_characteristic_write_cb(struct bt_conn *conn, const st
   memcpy(value_ptr + offset, buf, len);
   value_ptr[offset + len] = 0;
 
+  printk(" %s\n", value_ptr);
+
   return len;
 }
 
@@ -125,3 +127,4 @@ int main(void)
     k_sleep(K_MSEC(1000));
   }
 }
+
